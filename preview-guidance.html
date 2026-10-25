@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guidance preview</title>
+  </head>
+  <body style="margin:0;background:#101b17">
+    <div id="root"></div>
+    <script type="module">
+      import React from "react";
+      import { createRoot } from "react-dom/client";
+      import GuidancePanel from "/src/guidance/GuidancePanel.tsx";
+
+      const room = {
+        id: "preview",
+        name: "Living room",
+        source: "sample",
+        capturedAt: "2026-10-24T12:00:00Z",
+        reviewed: true,
+        boundary: [
+          { x: 0, y: 0 },
+          { x: 6, y: 0 },
+          { x: 6, y: 4.8 },
+          { x: 0, y: 4.8 },
+        ],
+        start: { x: 0.8, y: 2.2 },
+        goal: { x: 5.1, y: 2.2 },
+        obstacles: [
+          { id: "sofa", label: "Sofa", x: 1, y: 0.15, width: 4, depth: 1.25, movable: false, kind: "furniture", source: "sample" },
+          { id: "dining", label: "Dining table and chairs", x: 1, y: 3, width: 4, depth: 1.6, movable: false, kind: "furniture", source: "sample" },
+          { id: "basket", label: "Lightweight basket", x: 2.7, y: 1.85, width: 0.5, depth: 0.7, movable: true, kind: "clutter", source: "sample" },
+        ],
+      };
+      const step = {
+        id: "step-1",
+        obstacleId: "basket",
+        label: "Lightweight basket",
+        from: { x: 2.7, y: 1.85 },
+        to: { x: 5.2, y: 1.4 },
+        distance: 2.6,
+        movementPath: [
+          { x: 2.7, y: 1.85 },
+          { x: 3.7, y: 1.85 },
+          { x: 3.7, y: 1.1 },
+          { x: 5.2, y: 1.1 },
+        ],
+        instruction: "Move the lightweight basket.",
+        status: "pending",
+      };
+      const plan = {
+        status: "ready",
+        before: { routeClear: false, turningClear: false, path: [], bottleneck: 0, issues: [], turnCenter: { x: 5, y: 2.2 }, uncertain: false },
+        after: { routeClear: true, turningClear: true, path: [], bottleneck: 0, issues: [], turnCenter: { x: 5, y: 2.2 }, uncertain: false },
+        steps: [step],
+        roomAfter: room,
+        searchedStates: 1,
+        elapsedMs: 1,
+        reason: "",
+      };
+
+      createRoot(document.getElementById("root")).render(
+        React.createElement(GuidancePanel, {
+          room,
+          plan,
+          onStepReported() {},
+          onBlocked() {},
+          onRemeasure() {},
+          onClose() {},
+        }),
+      );
+    </script>
+  </body>
+</html>

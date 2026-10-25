@@ -1,0 +1,340 @@
+.scene-workspace {
+  position: relative;
+  isolation: isolate;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: #101b17;
+  color: #f5f5ed;
+}
+.scene-feed {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  visibility: hidden;
+  z-index: -3;
+}
+.scene-feed-visible {
+  visibility: visible;
+}
+img.scene-feed {
+  object-fit: contain;
+}
+.scene-shade {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    #07110c80,
+    transparent 22%,
+    transparent 43%,
+    #07110cec 78%,
+    #07110c
+  );
+  z-index: -2;
+  pointer-events: none;
+}
+.scene-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(18px + env(safe-area-inset-top)) 20px 12px;
+  position: relative;
+  z-index: 5;
+}
+.scene-brand {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+.scene-brand > span {
+  color: #d2f78e;
+}
+.scene-header > div {
+  display: flex;
+  gap: 8px;
+}
+.scene-header button,
+.scene-controls button {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid #ffffff25;
+  border-radius: 50%;
+  background: #14251b66;
+  backdrop-filter: blur(12px);
+}
+.scene-empty {
+  position: absolute;
+  top: 25dvh;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 18px;
+  color: #d2f78e;
+}
+.scene-empty > .scene-primary {
+  width: auto;
+  min-width: 190px;
+}
+.scene-photo-button {
+  font-size: 13px;
+  color: #e5eadd;
+  padding: 8px 14px;
+}
+.scene-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 24px 20px calc(22px + env(safe-area-inset-bottom));
+  max-height: 68dvh;
+  overflow: auto;
+}
+.scene-bottom h1 {
+  font-size: clamp(23px, 5.9vw, 32px);
+  line-height: 1.2;
+  letter-spacing: -0.8px;
+  font-weight: 500;
+  text-align: center;
+  margin: 0 0 4px;
+  max-width: 540px;
+  text-wrap: balance;
+}
+.scene-thinking {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.scene-count {
+  font-size: 12px;
+  color: #d2f78e;
+  font-variant-numeric: tabular-nums;
+}
+.scene-goal {
+  display: flex;
+  border: 1px solid #ffffff32;
+  border-radius: 18px;
+  max-width: 540px;
+  width: 100%;
+  background: #15251ddd;
+  backdrop-filter: blur(14px);
+  padding: 6px;
+}
+.scene-goal input {
+  min-width: 0;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  outline: none;
+  padding: 13px 11px;
+  color: white;
+  font-size: 16px;
+}
+.scene-goal input::placeholder {
+  color: #a8b5a9;
+}
+.scene-goal button {
+  flex-shrink: 0;
+  width: 46px;
+  background: #d2f78e;
+  color: #101b17;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+}
+.scene-controls {
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 2px;
+}
+.scene-controls button {
+  width: 44px;
+  height: 44px;
+}
+.scene-controls svg {
+  width: 19px;
+}
+.scene-controls .scene-on {
+  background: #d2f78e;
+  color: #101b17;
+  border-color: #d2f78e;
+}
+.scene-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 58px;
+  border-radius: 18px;
+  background: #d2f78e;
+  color: #101b17;
+  font-weight: 600;
+  font-size: 16px;
+  width: 100%;
+  max-width: 540px;
+  padding: 15px 24px;
+}
+.scene-check,
+.scene-retry {
+  font-size: 13px;
+  padding: 4px 16px;
+  color: #d2f78e;
+}
+.scene-note {
+  font-size: 11px;
+  color: #a7b7a9;
+  min-height: 13px;
+  text-align: center;
+}
+.scene-labels {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+.scene-object {
+  position: absolute;
+  border: 1px solid #d2f78e88;
+  border-radius: 12px;
+  transition: all 0.4s ease;
+}
+.scene-object-name {
+  position: absolute;
+  top: -12px;
+  left: 9px;
+  background: #14251ee6;
+  border: 1px solid #d2f78e77;
+  color: #eff5e7;
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 12px;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+.scene-object-target {
+  border: 2px solid #d2f78e;
+  box-shadow: 0 0 25px #d2f78e25;
+}
+.scene-object-instruction {
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  transform: translate(-50%, 100%);
+  width: max-content;
+  max-width: 250px;
+  padding: 7px 10px;
+  border-radius: 12px;
+  background: #14251eee;
+  border: 1px solid #f0b45e;
+  color: #f7efdf;
+  font-size: 12px;
+  line-height: 1.3;
+  text-align: center;
+  white-space: normal;
+}
+.scene-arrow {
+  position: absolute;
+  left: 50%;
+  top: -85px;
+  transform: translateX(-50%);
+  font-size: 58px;
+  line-height: 1;
+  color: #d2f78e;
+  text-shadow: 0 2px 8px #0008;
+}
+.scene-arrow b {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  background: #d2f78e;
+  color: #101b17;
+  display: grid;
+  place-items: center;
+  text-shadow: none;
+}
+@media (min-width: 750px) {
+  .scene-bottom {
+    padding-bottom: 32px;
+  }
+  .scene-empty {
+    top: 24vh;
+  }
+  .scene-bottom h1 {
+    font-size: 30px;
+  }
+  .scene-header {
+    padding: 24px 32px;
+  }
+  .scene-workspace {
+    min-height: 100dvh;
+  }
+}
+@media (max-height: 650px) {
+  .scene-bottom {
+    gap: 9px;
+    max-height: 72dvh;
+    padding-bottom: 12px;
+  }
+  .scene-empty {
+    top: 17vh;
+    gap: 10px;
+  }
+  .scene-bottom h1 {
+    font-size: 22px;
+  }
+  .scene-primary {
+    min-height: 48px;
+  }
+  .scene-controls button {
+    height: 38px;
+    width: 38px;
+  }
+}
+.scene-target-arrow {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: 58px;
+  line-height: 1;
+  color: #d2f78e;
+  text-shadow: 0 2px 8px #0008;
+}
+.scene-target-arrow b {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  background: #d2f78e;
+  color: #101b17;
+  display: grid;
+  place-items: center;
+  text-shadow: none;
+}
+.scene-frame-note {
+  position: absolute;
+  top: 78px;
+  left: 20px;
+  color: #c5d2c8;
+  font-size: 10px;
+  letter-spacing: 0.2px;
+  z-index: 4;
+}

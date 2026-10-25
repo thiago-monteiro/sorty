@@ -1,0 +1,56 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["working", "complete", "needs_input"]
+    },
+    "intent": {
+      "type": "string",
+      "enum": ["route", "task"]
+    },
+    "navigationTargetId": { "type": "string", "maxLength": 64 },
+    "summary": { "type": "string", "maxLength": 160 },
+    "objects": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string", "maxLength": 64 },
+          "label": { "type": "string", "maxLength": 80 },
+          "description": { "type": "string", "maxLength": 120 },
+          "bbox": {
+            "type": "array",
+            "items": { "type": "integer", "minimum": 0, "maximum": 1000 },
+            "minItems": 4,
+            "maxItems": 4
+          },
+          "movable": {
+            "type": "string",
+            "enum": ["likely", "unlikely", "unknown"]
+          }
+        },
+        "required": ["id", "label", "description", "bbox", "movable"],
+        "additionalProperties": false
+      }
+    },
+    "steps": {
+      "type": "array",
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string", "maxLength": 64 },
+          "instruction": { "type": "string", "maxLength": 160 },
+          "targetId": { "type": "string", "maxLength": 64 }
+        },
+        "required": ["id", "instruction"],
+        "additionalProperties": false
+      }
+    },
+    "question": { "type": "string", "maxLength": 200 }
+  },
+  "required": ["status", "intent", "summary", "objects", "steps"],
+  "additionalProperties": false
+}

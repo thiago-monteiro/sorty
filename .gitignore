@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.runtime/
+.env
+.env.*
+!.env.example
+*.log
+coverage/
+.local/
+public/connection.json
