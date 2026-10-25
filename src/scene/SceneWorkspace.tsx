@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import {
+  ArrowLeft,
   ArrowRight,
   Camera,
   Check,
@@ -22,8 +23,10 @@ import "./scene.css";
 
 export default function SceneWorkspace({
   onMeasure,
+  onClose,
 }: {
   onMeasure: () => void;
+  onClose?: () => void;
 }) {
   const video = useRef<HTMLVideoElement>(null);
   const upload = useRef<HTMLInputElement>(null);
@@ -384,6 +387,11 @@ export default function SceneWorkspace({
           sorty<span>·</span>
         </span>
         <div>
+          {onClose && (
+            <button aria-label="Back to start" onClick={onClose}>
+              <ArrowLeft size={20} />
+            </button>
+          )}
           <button
             aria-label="Measured room scan"
             onClick={() => {

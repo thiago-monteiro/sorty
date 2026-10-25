@@ -23,6 +23,7 @@ import { assessRoom, pointInPolygon } from "./geometry";
 import { solveRoomAsync } from "./planner/client";
 import RoomMap from "./components/RoomMap";
 import GuidancePanel from "./guidance/GuidancePanel";
+import Home from "./Home";
 
 const XRWorkspace = lazy(() => import("./xr/XRWorkspace"));
 const PhoneConnect = lazy(() => import("./components/PhoneConnect"));
@@ -35,9 +36,9 @@ const PROFILE: Settings = {
 };
 
 export default function App() {
-  const [screen, setScreen] = useState<"assistant" | "scan" | "room" | "guide">(
-    "scan",
-  );
+  const [screen, setScreen] = useState<
+    "home" | "assistant" | "scan" | "room" | "guide"
+  >("home");
   const [room, setRoom] = useState<Room | null>(null);
   const [original, setOriginal] = useState<Room | null>(null);
   const [plan, setPlan] = useState<Plan | null>(null);
@@ -151,10 +152,29 @@ export default function App() {
       <span>Opening camera…</span>
     </div>
   );
+  if (screen === "home")
+    return (
+      <>
+        <Home
+          onScan={() => scan()}
+          onAssistant={() => setScreen("assistant")}
+          onSample={sample}
+          onPhone={!onPhone ? () => setPhone(true) : undefined}
+        />
+        {phone && (
+          <Suspense fallback={null}>
+            <PhoneConnect onClose={() => setPhone(false)} />
+          </Suspense>
+        )}
+      </>
+    );
   if (screen === "assistant")
     return (
       <Suspense fallback={loading}>
-        <SceneWorkspace onMeasure={() => scan()} />
+        <SceneWorkspace
+          onMeasure={() => scan()}
+          onClose={() => setScreen("home")}
+        />
       </Suspense>
     );
   if (screen === "scan")
@@ -166,7 +186,7 @@ export default function App() {
             room={room || undefined}
             plan={plan || undefined}
             onComplete={receiveScan}
-            onClose={() => setScreen("assistant")}
+            onClose={() => setScreen("home")}
             onDemo={sample}
             onAssistant={() => setScreen("assistant")}
             onPhone={!onPhone ? () => setPhone(true) : undefined}
