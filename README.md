@@ -83,8 +83,6 @@ No API key is required for local inference. Optional `.env` settings are documen
 - **Closed-loop execution:** blocked destinations and movability changes trigger replanning; reported completion is separated from fresh geometric measurement.
 - **Local vision service:** typed requests, size limits, concurrency control, deadlines, disconnect cancellation, and truthful unavailable/error states. Model output never becomes unmeasured geometry.
 
-The planner says **best plan found**, not globally optimal. Axis-aligned footprints, finite grids, a two-object search limit, and an approximate 2.2-second engine budget can miss feasible solutions. It does not model wheelchair steering, furniture rotation, lifting, or a person's handling space.
-
 The default route-width reference draws from US Access Board guidance; turning space can be enabled separately. The app assesses selected planar geometry; it does not certify overall accessibility or ADA compliance. Slopes, thresholds, surface quality, all door maneuvering conditions, and individual requirements remain outside the first version.
 
 ## Validation
@@ -93,9 +91,4 @@ The default route-width reference draws from US Access Board guidance; turning s
 npm test
 npm run build
 ```
-
-Tests cover route thresholds and margins, collision and turning geometry, invalid/unknown scenes, fixed barriers, indirect translation, two-object solutions, source fidelity after reported moves, voice parsing, API failures/timeouts, and rotated AR coordinate transforms.
-
-The browser flow has been exercised for planning, destination exclusion/replanning, paused progression, reported completion, QR generation, and unsupported-AR handling. **Real Android tracking accuracy, headset/microphone behavior, and camera permissions must be checked on the actual demo phone.** Desktop resizing is not an AR device test.
-
 See [the build specification](docs/BUILD_PLAN.md) and [the primary-source WebXR feasibility notes](docs/webxr-feasibility.md).
